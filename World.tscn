@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxnrnduoouo7x"]
+
+[ext_resource type="PackedScene" uid="uid://cvgrf6onixlk6" path="res://gooble.tscn" id="1_6ppsk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bdmkw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2eo45"]
+albedo_color = Color(0.387733, 0.548828, 0.271635, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hx8ws"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqblc"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Gooble" parent="." instance=ExtResource("1_6ppsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0387831, 26.1475, -0.141087)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(191.956, 0, 0, 0, -1.38677, 0, 0, 0, 167.921, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_bdmkw")
+surface_material_override/0 = SubResource("StandardMaterial3D_2eo45")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_hx8ws")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(7.66854, 0, 0, 0, -3.36378, 0, 0, 0, 61.3981, 6.91866, 1.30065, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_bdmkw")
+surface_material_override/0 = SubResource("StandardMaterial3D_nqblc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_hx8ws")
