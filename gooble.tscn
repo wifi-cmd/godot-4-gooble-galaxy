@@ -1,21 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvgrf6onixlk6"]
+[gd_scene load_steps=8 format=3 uid="uid://cvgrf6onixlk6"]
 
-[ext_resource type="Script" path="res://gooble.gd" id="1_x7tio"]
+[ext_resource type="Script" path="res://gooblescript.gd" id="1_jiei1"]
 [ext_resource type="ArrayMesh" uid="uid://cpoej3j64rvlg" path="res://Models/GoobleV1.obj" id="2_je8t2"]
+[ext_resource type="Script" path="res://CameraAnchor.gd" id="3_7n4uk"]
+[ext_resource type="Script" path="res://CameraJoint.gd" id="4_npx86"]
+[ext_resource type="Script" path="res://BalancePoint.gd" id="5_urxvl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_swsci"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f6ebk"]
+radius = 0.15
+height = 0.3
+
 [node name="Gooble" type="CharacterBody3D"]
-script = ExtResource("1_x7tio")
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_jiei1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, -0.930401, 0)
 mesh = ExtResource("2_je8t2")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.665361, 0.746522, 0, -0.746522, 0.665361, -0.0174177, 5.03767, 4.94301)
-fov = 68.9859
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0300493, 0)
 shape = SubResource("CapsuleShape3D_swsci")
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+script = ExtResource("3_7n4uk")
+
+[node name="CameraArm" type="SpringArm3D" parent="CameraAnchor"]
+spring_length = 18.0
+margin = 0.2
+script = ExtResource("4_npx86")
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor/CameraArm"]
+current = true
+fov = 80.0
+far = 550.0
+
+[node name="BalancePoint" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_urxvl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BalancePoint"]
+shape = SubResource("CapsuleShape3D_f6ebk")
+
+[connection signal="area_entered" from="BalancePoint" to="BalancePoint" method="_on_BalancePoint_area_entered"]
+[connection signal="area_exited" from="BalancePoint" to="BalancePoint" method="_on_BalancePoint_area_exited"]
