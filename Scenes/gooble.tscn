@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cvgrf6onixlk6"]
 
-[ext_resource type="Script" path="res://gooblescript.gd" id="1_jiei1"]
+[ext_resource type="Script" path="res://Scripts/gooblescript.gd" id="1_jiei1"]
 [ext_resource type="ArrayMesh" uid="uid://cpoej3j64rvlg" path="res://Models/GoobleV1.obj" id="2_je8t2"]
-[ext_resource type="Script" path="res://CameraAnchor.gd" id="3_7n4uk"]
-[ext_resource type="Script" path="res://CameraJoint.gd" id="4_npx86"]
-[ext_resource type="Script" path="res://BalancePoint.gd" id="5_urxvl"]
+[ext_resource type="Script" path="res://Scripts/CameraAnchor.gd" id="3_7n4uk"]
+[ext_resource type="Script" path="res://Scripts/CameraJoint.gd" id="4_npx86"]
+[ext_resource type="Script" path="res://Scripts/BalancePoint.gd" id="5_urxvl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_swsci"]
 

@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 @export var speed := 7.50
-@export var jump_strength := 4.0
 
 @export var velocity_control_floor := 50.0
 @export var velocity_control_air := 5.0
@@ -70,8 +69,6 @@ func _physics_process(delta: float) -> void:
 		current_velocity_control = velocity_control_air
 		current_torque_control = torque_control_air
 	
-	# Jumping
-	self._process_jumping()
 	
 	# Walking
 	_process_walking(movement_intention, current_velocity_control * delta)
@@ -84,14 +81,6 @@ func _physics_process(delta: float) -> void:
 	
 	# ... and turn
 	_process_turning(movement_intention, current_torque_control * delta)
-
-
-func _process_jumping():
-	var up := _balance_point.up
-	
-	var is_jumping := self.is_on_floor() and Input.is_action_just_pressed( "jump")
-	if is_jumping:
-		velocity += up * jump_strength - velocity.project(up)
 
 
 func _process_walking(movement_intention: Vector3, control: float):
